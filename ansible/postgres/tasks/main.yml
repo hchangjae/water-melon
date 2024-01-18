@@ -1,3 +1,12 @@
+- name: install prerequisites
+  sudo: true
+  apt: name={{ item }} state=latest
+  with_items:
+    - libpq-dev
+    - python-psycopg2
+  tags:
+    - packages
+
 - name: Import the repository signing key
   ansible.builtin.apt_key:
     url: https://www.postgresql.org/media/keys/ACCC4CF8.asc

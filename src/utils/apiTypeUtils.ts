@@ -1,9 +1,5 @@
-import { GetAdminOrderRequest, GetAdminOrderResponse } from '@/pages/api/admin/order.page';
 import { GetAdminUserRequest, GetAdminUserResponse } from '@/pages/api/admin/user.page';
-import { PostOrderRequest, PostOrderResponse } from '@/pages/api/order.page';
-import { GetRankRequest, GetRankResponse } from '@/pages/api/rank.page';
 import { GetUserMeRequest, GetUserMeResponse, PostUserMeRequest, PostUserMeResponse } from '@/pages/api/user/me.page';
-import { GetUserReferrerRequest, GetUserReferrerResponse } from '@/pages/api/user/referrer.page';
 import { AxiosRequestConfig } from 'axios';
 
 /**
@@ -29,18 +25,6 @@ type ApiInterface = {
   '/api/user/me': {
     [Method.Get]: { request: GetUserMeRequest; response: GetUserMeResponse };
     [Method.Post]: { request: PostUserMeRequest; response: PostUserMeResponse };
-  };
-  '/api/user/referrer': {
-    [Method.Get]: { request: GetUserReferrerRequest; response: GetUserReferrerResponse };
-  };
-  '/api/order': {
-    [Method.Post]: { request: PostOrderRequest; response: PostOrderResponse };
-  };
-  '/api/rank': {
-    [Method.Get]: { request: GetRankRequest; response: GetRankResponse };
-  };
-  '/api/admin/order': {
-    [Method.Get]: { request: GetAdminOrderRequest; response: GetAdminOrderResponse };
   };
   '/api/admin/user': {
     [Method.Get]: { request: GetAdminUserRequest; response: GetAdminUserResponse };

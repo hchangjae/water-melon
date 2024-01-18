@@ -4,7 +4,7 @@ import { User } from '@prisma/client';
 import { handleMethod, withGoogleAuth } from '@/utils/serverUtils';
 
 const get = async (request: NextApiRequest, response: NextApiResponse) => {
-  const users = (await prisma.user.findMany()).map((v) => ({ ...v, dollar: Number(v.dollar), fee: Number(v.fee) }));
+  const users = await prisma.user.findMany();
 
   return response.status(200).json(users);
 };

@@ -1,11 +1,9 @@
-- name: PostgreSQL | Install PostgreSQL dependencies
-  sudo: true
-  apt: name={{ item }} state=latest
+- name: Install PostgreSQL
+  apt: name={{ item }} update_cache={{ update_apt_cache }} state=installed
   with_items:
-    - libpq-dev
-    - python-psycopg2
-  tags:
-    - packages
+    - postgresql
+    - postgresql-contrib
+    - python3-psycopg2
 
 - name: Import the repository signing key
   ansible.builtin.apt_key:

@@ -6,7 +6,7 @@ type Props = { [key: string]: any };
 const withTitle =
   (_title: string) =>
   <T extends Props>(Component: React.ComponentType<T>) => {
-    const title = `White daisy echo - ${_title}`;
+    const title = `Watermelon - ${_title}`;
     const ComponentWithTitle = (props: T) => (
       <React.Fragment>
         <Head>{title && <title>{title}</title>}</Head>

@@ -1,0 +1,12 @@
+- name: Install Nginx
+  apt:
+    name: nginx
+    state: latest
+
+- name: Ensure Nginx is running
+  service:
+    name: nginx
+    state: started
+    enabled: yes
+
+- import_tasks: letsencrypt.yml

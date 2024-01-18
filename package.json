@@ -1,0 +1,49 @@
+{
+  "name": "nextjs",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "next start",
+    "build": "next build",
+    "dev": "next dev --experimental-https -p 3000",
+    "type": "tsc --noEmit",
+    "lint": "next lint",
+    "postinstall": "prisma generate",
+    "db:push": "prisma db push",
+    "db:migrate": "prisma migrate deploy",
+    "db:format": "prisma format",
+    "db:update": "prisma generate",
+    "db:remote": "sh ./scripts/reverse-ssh-tunnel.sh 'yarn dev'",
+    "db:remote:push": "sh ./scripts/reverse-ssh-tunnel.sh 'yarn db:push'",
+    "db:remote:migrate": "sh ./scripts/reverse-ssh-tunnel.sh 'yarn db:migrate'"
+  },
+  "prisma": {
+    "schema": "src/schema.prisma"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.7.0",
+    "@tanstack/react-query": "^5.14.1",
+    "@vercel/postgres": "^0.5.1",
+    "antd": "^5.12.5",
+    "axios": "^1.6.2",
+    "date-fns": "^3.0.1",
+    "next": "14.0.4",
+    "next-auth": "^4.24.5",
+    "prisma": "^5.7.0",
+    "react": "^18",
+    "react-dom": "^18",
+    "sharp": "^0.33.1",
+    "styled-components": "^6.1.1",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@svgr/webpack": "^8.1.0",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "@types/uuid": "^9.0.7",
+    "eslint": "^8",
+    "eslint-config-next": "14.0.4",
+    "typescript": "^5"
+  }
+}

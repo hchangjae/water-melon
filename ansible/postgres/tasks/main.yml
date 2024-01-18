@@ -1,0 +1,52 @@
+- name: Import the repository signing key
+  ansible.builtin.apt_key:
+    url: https://www.postgresql.org/media/keys/ACCC4CF8.asc
+    state: present
+
+- name: PostgreSQL | Add PostgreSQL Repository
+  ansible.builtin.apt_repository:
+    repo: deb http://apt.postgresql.org/pub/repos/apt/ focal-pgdg main
+    state: present
+
+- name: PostgreSQL | Install PostgreSQL
+  ansible.builtin.apt:
+    pkg:
+      - postgresql-15
+      - postgresql-client-15
+    cache_valid_time: 86400
+    state: present
+
+- name: PostgreSQL | Ensure PostgreSQL is running
+  ansible.builtin.service:
+    name: postgresql
+    state: started
+    enabled: yes
+
+- name: PostgreSQL | Install acl for fix set permissions on the temporary files | apt
+  apt:
+    pkg: acl
+    state: present
+  when: ansible_distribution == "Ubuntu" and ansible_distribution_version == "20.04"
+
+- name: PostgreSQL | Create database
+  become: yes
+  become_method: sudo
+  become_user: postgres
+  vars:
+    ansible_ssh_pipelining: true
+  postgresql_db:
+    name: mydb
+    encoding: UTF-8
+    state: present
+
+- name: PostgreSQL | Create PostgreSQL user
+  become: yes
+  become_method: sudo
+  become_user: postgres
+  vars:
+    ansible_ssh_pipelining: true
+  postgresql_user:
+    db: mydb
+    name: '{{ postgres_username }}'
+    password: '{{ postgres_password }}'
+    priv: ALL/ALL

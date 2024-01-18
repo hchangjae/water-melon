@@ -1,0 +1,18 @@
+- name: Add NodeSource repo
+  shell: curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+  args:
+    creates: /etc/apt/sources.list.d/nodesource.list
+  register: nodesource_script
+
+- name: Check if NodeSource repo was added
+  debug:
+    msg: 'NodeSource repo added'
+  when: nodesource_script.changed
+
+- name: Install Node
+  apt:
+    name: nodejs
+    update_cache: yes
+
+- import_tasks: yarn.yml
+- import_tasks: pm2.yml

@@ -1,4 +1,4 @@
-- name: install prerequisites
+- name: PostgreSQL | Install PostgreSQL dependencies
   sudo: true
   apt: name={{ item }} state=latest
   with_items:
